@@ -3,27 +3,37 @@ import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 import { getCharactersList } from './actions';
 import { ICharacter } from '../../interfaces';
 
-type CharactersState = {
+export interface CharactersState {
   list: ICharacter[];
   error?: Boolean;
-  totalCount: Number
-};
+  pending?: Boolean;
+  availableTotalPage?: number
+  currentPage: number;
+}
 
 const initialState: CharactersState = {
   list: [],
   error: false,
-  totalCount: 0,
+  pending: false,
+  availableTotalPage: 0,
+  currentPage: 0,
 };
 
 export const charactersReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(getCharactersList.pending, (state) => {
+      state.pending = true;
+      state.error = false;
+    })
     .addCase(getCharactersList.fulfilled, (state, action: PayloadAction<CharactersState>) => {
-      state.list = action.payload.list;
-      state.totalCount = action.payload.totalCount;
+      state.pending = false;
+      state.list = [...state.list, ...action.payload.list];
+      state.availableTotalPage = action.payload.availableTotalPage;
+      state.currentPage += 1;
     })
     .addCase(getCharactersList.rejected, (state) => {
       state.error = true;
-      state.totalCount = 0;
+      state.pending = false;
     });
 });
 

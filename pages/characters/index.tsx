@@ -1,19 +1,52 @@
+import { useEffect } from 'react';
+import { FaSpinner } from 'react-icons/fa';
 import {
   getCharactersList,
   charactersSelector,
 } from '../../features/characters';
 import { wrapper } from '../../app/store';
-import { Layout } from '../../shared-components';
-import { useAppSelector } from '../../app/hooks';
+import {
+  Layout, ScrollTopArrow, Title, Spinner,
+} from '../../shared-components';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import CharacterList from '../../components/characters/CharacterList';
+
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 const CharactersPage = () => {
-  const data = useAppSelector(charactersSelector);
-  console.log('🚀 ~ file: index.tsx ~ line 11 ~ CharactersPage ~ data', data);
+  const dispatch = useAppDispatch();
+  const {
+    list, currentPage, availableTotalPage, pending,
+  } = useAppSelector(charactersSelector);
+
+  const isPageBottom = useInfiniteScroll();
+
+  useEffect(() => {
+    if (!isPageBottom) return;
+    dispatch(getCharactersList());
+  }, [dispatch, isPageBottom]);
+
   return (
     <Layout label="Characters">
-      <div>
-        <p>Falan Filan</p>
-      </div>
+      <>
+        <CharacterList list={list} />
+
+        {pending && (
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <Spinner />
+          </div>
+        )}
+
+        {availableTotalPage && currentPage > availableTotalPage && (
+          <Title
+            headingLevel="h1"
+            style={{ textAlign: 'center' }}
+          >
+            End of list...
+          </Title>
+        )}
+      </>
+      <ScrollTopArrow />
     </Layout>
   );
 };

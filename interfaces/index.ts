@@ -70,3 +70,8 @@ export interface ICharacter {
   events: EventList,
   series: SeriesList
 }
+
+export interface IResponse {
+  total: number,
+  results: ICharacter[]
+}

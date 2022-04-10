@@ -1,10 +1,10 @@
 import { memo, FC } from 'react';
-
+import { FaSpinner } from 'react-icons/fa';
 import styles from '../styles/Spinner.module.css';
 
 const Spinner: FC = () => (
-  <div className={styles['loading-spinner__overlay']}>
-    <div className={styles['lds-dual-ring']} />
+  <div>
+    <FaSpinner className={styles.spinner} />
   </div>
 );
 
