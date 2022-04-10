@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
+    "abort-controller": "^3.0.0",
     "axios": "^0.26.1",
     "axios-cache-adapter": "^2.7.3",
     "md5": "^2.3.0",

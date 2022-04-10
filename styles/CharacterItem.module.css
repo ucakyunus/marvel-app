@@ -1,6 +1,7 @@
 .listItem {
   background: aliceblue;
   width: 49%;
+  height: 120px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -26,4 +27,19 @@
 .listItem div {
   width: 100%;
   text-align: center;
+}
+
+.listItem .description {
+  padding: 0 1rem
+}
+
+.listItem .description p {
+  font-size: 12px;
+  color: black;
+  opacity: 0.7;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
