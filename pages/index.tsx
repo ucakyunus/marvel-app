@@ -4,12 +4,12 @@ import { Layout, Title, CardLink } from '../shared-components';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => (
-  <Layout label="Ana Sayfa">
+  <Layout label="Ana Sayfa" className={styles.layout}>
     <>
       <a
         className={styles.goToGithub}
         target="blank"
-        href="https://github.com/ucakyunus/iyzico-case"
+        href="https://github.com/ucakyunus/marvel-mintus-app"
       >
         <FaGithub size={20} />
         <Title headingLevel="h5">Proje Linki</Title>

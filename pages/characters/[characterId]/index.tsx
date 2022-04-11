@@ -1,32 +1,79 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-import { getCharacterDetail } from '../../../features/characterDetail/actions';
+import Image from 'next/image';
+import marvelApi from '../../../services/api';
 import { wrapper } from '../../../app/store';
-import { Layout, Title } from '../../../shared-components';
-
+import { Layout, Title, TextShow } from '../../../shared-components';
+import {
+  IResponse, ICharacter, ComicSummary, SeriesSummary,
+} from '../../../interfaces';
 import styles from '../../../styles/CharacterDetail.module.css';
 
-const CharacterDetail = () => (
-  <Layout label="Detail">
-    <Link scroll={false} href="/characters">
-      <a className={styles.backButton}>
-        <FaArrowLeft />
-        {' '}
-        <Title>Back</Title>
-      </a>
-    </Link>
+type CharacterDetailProps = {
+  characterDetail: ICharacter
+}
 
-  </Layout>
-);
+const CharacterDetail: FC<CharacterDetailProps> = ({ characterDetail }) => {
+  const getDetailList = (list: ComicSummary[] | SeriesSummary[]) => (
+    <ul>
+      {list.map((comic: ComicSummary | SeriesSummary, index: number) => (
+        <li key={index}>{comic?.name}</li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <Layout label="Detail">
+      <main>
+        <Link scroll={false} href="/characters">
+          <a className={styles.backButton}>
+            <FaArrowLeft />
+            {' '}
+            <Title>Back</Title>
+          </a>
+        </Link>
+
+        <div className={styles.characterDetail}>
+
+          <Image
+            src={`${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`}
+            alt={characterDetail.name}
+            layout="intrinsic"
+            width={500}
+            height={500}
+            objectFit="cover"
+            priority
+          />
+          <div className={styles.textList}>
+            <TextShow textKey="Name" textValue={characterDetail.name} />
+            {characterDetail.description && <TextShow textKey="Description" textValue={characterDetail.description} />}
+            {characterDetail.comics.items.length > 0 && (
+              <TextShow textKey="Comics">
+                {getDetailList(characterDetail.comics.items)}
+              </TextShow>
+            )}
+            {characterDetail.series.items.length > 0 && (
+              <TextShow textKey="Series">
+                {getDetailList(characterDetail.series.items)}
+              </TextShow>
+            )}
+          </div>
+        </div>
+      </main>
+    </Layout>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) => async (context) => {
+  () => async (context) => {
     const characterId: string = context.params?.characterId as string || '';
-    store.dispatch(getCharacterDetail(characterId));
+    const response: IResponse = await marvelApi.get(`characters/${characterId}`);
     return {
-      props: {},
+      props: {
+        characterDetail: response.results[0],
+      },
     };
   },
 );

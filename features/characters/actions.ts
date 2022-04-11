@@ -68,3 +68,21 @@ export const getSearchedCharactersList = createAsyncThunk('chracters/searchChara
     availableTotalPage: Math.ceil(total / (100 * 2)),
   };
 });
+
+// export const getCharacterDetail = createAsyncThunk(
+//   'characters/characterDetail',
+//   async (characterId: string) => {
+//     const response: IResponse = await marvelApi.get(`characters/${characterId}`);
+//     return {
+//       characterDetail: response?.results[0],
+//     };
+//   },
+//   {
+//     condition: (characterId) => {
+//       if (!characterId) {
+//         return false;
+//       }
+//       return true;
+//     },
+//   },
+// );

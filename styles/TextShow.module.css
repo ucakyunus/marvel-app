@@ -1,4 +1,4 @@
-.textShow {
+.styleTextShow {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,4 +13,29 @@
           align-items: center;
   margin-bottom: .5rem;
   background-color: white;
+  width: 100%;
+}
+
+.styleTextValue {
+  margin: 0 0 0 2rem;
+}
+
+.styleDetailContainer ul {
+  text-align: right;
+  list-style-type: none;
+}
+
+@media(max-width:576px) {
+  .styleListShow {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center
+  }
+
+  .styleDetailContainer  ul {
+    list-style-type: dotted;
+    text-align: left;
+    margin: 0 0 0 1rem;
+    padding: 0
+  }
 }

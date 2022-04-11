@@ -12,7 +12,10 @@ export const selectCharacterList = (state: RootState) => ({
   })),
 });
 
+export const selectCharacterDetail = (state: RootState) => state.characterDetail;
+
 export const charactersSelector = createSelector(
   selectCharacterList,
+  selectCharacterDetail,
   (state) => state,
 );

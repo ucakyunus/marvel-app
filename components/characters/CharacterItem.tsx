@@ -1,5 +1,5 @@
 import React, { memo, FC } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { Title } from '../../shared-components';
@@ -7,8 +7,8 @@ import { Title } from '../../shared-components';
 import styles from '../../styles/CharacterItem.module.css';
 
 type CharacterItemProps = {
-  poster: String,
-  name: String,
+  poster: string,
+  name: string,
   characterId: Number | String,
   description: String
 }

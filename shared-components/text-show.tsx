@@ -5,16 +5,16 @@ import styles from '../styles/TextShow.module.css';
 
 type TextShowProps = {
   textKey: string,
-  textValue?: string,
+  textValue?: String,
   children?: ReactNode
 }
 
 const TextShow: FC<TextShowProps> = ({ textKey, textValue, children }) => (
-  <div className={styles.textShow}>
+  <div className={`${styles.styleTextShow} ${children && styles.styleListShow}`}>
     <Title>{textKey}</Title>
-    {textValue && <span>{textValue}</span>}
+    {textValue && <Title headingLevel="p" className={styles.styleTextValue}>{textValue}</Title>}
     {children && (
-      <div>
+      <div className={styles.styleDetailContainer}>
         {children}
       </div>
     )}

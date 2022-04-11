@@ -7,11 +7,9 @@ import {
 } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { charactersReducer } from '../features/characters';
-import { characterDetailReducer } from '../features/characterDetail';
 
 const combinedReducer: any = combineReducers({
   characters: charactersReducer,
-  characterDetail: characterDetailReducer,
 });
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {

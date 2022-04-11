@@ -1,25 +1,23 @@
-.example {
-  display: -ms-grid;
-  display: grid;
-  -webkit-transition: all .5s;
-  -o-transition: all .5s;
-  transition: all .5s;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(black));
-  background: -o-linear-gradient(top, white, black);
-  background: linear-gradient(to bottom, white, black);
-}
-
 .characterDetail {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  align-items: center;
   background-color: #ececec;
   padding: 1rem;
   border-radius: 5px;
+}
+
+.textList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding: 1rem 0;
 }
 
 .backButton {
@@ -40,28 +38,8 @@
   cursor: pointer;
 }
 
-.characterDetail img {
-  border-radius: 5px;
-}
-
-.textList {
-  width: 100%;
-  padding: 1rem; 
-}
-
-.textList ul{
-  text-align: right;
-  list-style-type: none;
-}
-
-@media (max-width: 992px) {
+@media (min-width: 960px) {
   .characterDetail {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .textList {
-    padding: 1rem 0;
+    min-width: 100%;
   }
 }

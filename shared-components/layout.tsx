@@ -13,11 +13,12 @@ declare module 'react' {
 
 type LayoutProps = {
   label: string,
-  children: React.ReactNode
+  children: React.ReactNode,
+  className?: string
 }
 
-const Layout: React.FunctionComponent<LayoutProps> = ({ children, label }) => (
-  <div className={styles.container}>
+const Layout: React.FunctionComponent<LayoutProps> = ({ children, label, className }) => (
+  <div className={`${styles.container} ${className}`}>
     <Head>
       <title label={label} />
       <link rel="icon" href="/favicon.ico" />

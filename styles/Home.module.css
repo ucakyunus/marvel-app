@@ -6,6 +6,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  align-items: center;
 }
 
 .goToGithub h5 {
@@ -16,6 +17,10 @@
   cursor: pointer;
   color: darkgray;
   text-decoration: underline;
+}
+
+.layout {
+  justify-content: center
 }
 
 .mainHome {

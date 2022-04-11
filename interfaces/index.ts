@@ -59,7 +59,7 @@ export interface SeriesList {
 
 export interface ICharacter {
   id: Number,
-  name: String,
+  name: string,
   description: String,
   modified: Date,
   resourceURI: string,
