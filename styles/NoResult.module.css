@@ -1,0 +1,10 @@
+.noresult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoIcon {
+  font-size:4rem;
+  color: red
+}

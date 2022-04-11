@@ -1,6 +1,9 @@
 /* eslint-disable no-async-promise-executor */
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import marvelApi from '../../services/api';
+import { IResponse } from '../../interfaces';
+
+export const resetCharacterList = createAction('characters/resetCharacterList');
 
 export const getCharactersList = createAsyncThunk(
   'characters/charactersList',
@@ -16,6 +19,7 @@ export const getCharactersList = createAsyncThunk(
           params: {
             limit: 100,
             offset: 2 * currentPage,
+            orderBy: 'name',
           },
         }),
       marvelApi
@@ -23,17 +27,17 @@ export const getCharactersList = createAsyncThunk(
           params: {
             limit: 100,
             offset: 2 * currentPage + 1,
+            orderBy: 'name',
           },
         }),
     ]);
 
-    const { results, total } = response1;
+    const { results, total } = response1 as IResponse;
     const { results: results2 } = response2;
 
     return {
       list: [...results, ...results2],
       availableTotalPage: Math.ceil(total / (100 * 2)),
-      currentPage,
     };
   },
   {
@@ -46,3 +50,21 @@ export const getCharactersList = createAsyncThunk(
     },
   },
 );
+
+export const getSearchedCharactersList = createAsyncThunk('chracters/searchCharactersList', async (searchValue) => {
+  const response: any = await marvelApi
+    .get('/characters', {
+      params: {
+        limit: 100,
+        nameStartsWith: searchValue,
+        orderBy: 'name',
+      },
+    });
+
+  const { results, total } = response as IResponse;
+
+  return {
+    list: results,
+    availableTotalPage: Math.ceil(total / (100 * 2)),
+  };
+});

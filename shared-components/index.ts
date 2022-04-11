@@ -4,6 +4,8 @@ import TextShow from './text-show';
 import Title from './title';
 import ScrollTopArrow from './scroll-top-arrow';
 import Spinner from './spinner';
+import DebounceInput from './debounce-input';
+import NoResult from './no-result';
 
 export {
   CardLink,
@@ -12,4 +14,6 @@ export {
   Title,
   ScrollTopArrow,
   Spinner,
+  DebounceInput,
+  NoResult,
 };

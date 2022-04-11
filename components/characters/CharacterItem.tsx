@@ -1,15 +1,22 @@
-import React, { memo } from 'react';
-import Image from 'next/image';
+import React, { memo, FC } from 'react';
+import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
 import { Title } from '../../shared-components';
 
 import styles from '../../styles/CharacterItem.module.css';
 
-const CharacterItem = ({
+type CharacterItemProps = {
+  poster: String,
+  name: String,
+  characterId: Number | String,
+  description: String
+}
+
+const CharacterItem: FC<CharacterItemProps> = ({
   poster, name, characterId, description,
 }) => (
-  <Link href={`/characters/${characterId}`}>
+  <Link scroll={false} href={`/characters/${characterId}`}>
     <a className={styles.listItem}>
       <div className={styles.imageContainer}>
         <Image src={poster} alt={name} layout="fill" objectFit="cover" />

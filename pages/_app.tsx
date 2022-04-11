@@ -1,13 +1,10 @@
-
 import type { AppProps } from 'next/app';
 import { wrapper } from '../app/store';
 
-function MyApp({
+const MyApp = ({
   Component, pageProps,
-}: AppProps) {
-  return (
-      <Component {...pageProps} />
-  );
-}
+}: AppProps) => (
+  <Component {...pageProps} />
+);
 
 export default wrapper.withRedux(MyApp);

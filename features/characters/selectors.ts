@@ -8,7 +8,7 @@ export const selectCharacterList = (state: RootState) => ({
     name: character.name,
     description: character.description,
     id: character.id,
-    image: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+    thumbnail: character.thumbnail,
   })),
 });
 

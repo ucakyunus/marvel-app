@@ -7,5 +7,5 @@
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
   justify-content: center;
-  padding: 1rem;
+  padding: 0 1rem;
 }
