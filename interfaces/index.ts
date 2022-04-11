@@ -73,5 +73,8 @@ export interface ICharacter {
 
 export interface IResponse {
   total: number,
+  offset?: number,
+  limit?: number,
+  count?: number,
   results: ICharacter[]
 }

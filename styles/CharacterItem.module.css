@@ -8,7 +8,9 @@
   border: 1px solid black;
   cursor: pointer;
   overflow: hidden;
-  text-decoration: none
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: -2px 4px 21px -1px #808080;
 }
 
 

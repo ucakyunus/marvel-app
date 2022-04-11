@@ -9,7 +9,7 @@ import styles from '../../styles/CharacterItem.module.css';
 const CharacterItem = ({
   poster, name, characterId, description,
 }) => (
-  <Link href={`character-detail/${characterId}`}>
+  <Link href={`/characters/${characterId}`}>
     <a className={styles.listItem}>
       <div className={styles.imageContainer}>
         <Image src={poster} alt={name} layout="fill" objectFit="cover" />

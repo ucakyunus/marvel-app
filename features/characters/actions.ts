@@ -1,6 +1,6 @@
 /* eslint-disable no-async-promise-executor */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../services/api';
+import marvelApi from '../../services/api';
 
 export const getCharactersList = createAsyncThunk(
   'characters/charactersList',
@@ -10,15 +10,15 @@ export const getCharactersList = createAsyncThunk(
     const [
       response1,
       response2,
-    ] = await Promise.all([
-      api
+    ]: [any, any] = await Promise.all([
+      marvelApi
         .get('/characters', {
           params: {
             limit: 100,
             offset: 2 * currentPage,
           },
         }),
-      api
+      marvelApi
         .get('/characters', {
           params: {
             limit: 100,
@@ -27,8 +27,8 @@ export const getCharactersList = createAsyncThunk(
         }),
     ]);
 
-    const { results, total }:any = response1;
-    const { results: results2 }:any = response2;
+    const { results, total } = response1;
+    const { results: results2 } = response2;
 
     return {
       list: [...results, ...results2],

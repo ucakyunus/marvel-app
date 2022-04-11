@@ -7,9 +7,11 @@ import {
 } from '@reduxjs/toolkit';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { charactersReducer } from '../features/characters';
+import { characterDetailReducer } from '../features/characterDetail';
 
 const combinedReducer: any = combineReducers({
   characters: charactersReducer,
+  characterDetail: characterDetailReducer,
 });
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {
@@ -18,8 +20,6 @@ const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) =
       ...state, // use previous state
       ...action.payload, // apply delta from hydration
     };
-    // if (state.characters.count) nextState.count.count = state.count.count
-    // preserve count value on client side navigation
     return nextState;
   }
   return combinedReducer(state, action);

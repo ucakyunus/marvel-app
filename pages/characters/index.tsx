@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FaSpinner } from 'react-icons/fa';
+import { GetServerSideProps } from 'next';
 import {
   getCharactersList,
   charactersSelector,
@@ -51,7 +51,7 @@ const CharactersPage = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     await store.dispatch(getCharactersList());
     return {
