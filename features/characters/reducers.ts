@@ -4,7 +4,6 @@ import {
   getCharactersList,
   getSearchedCharactersList,
   resetCharacterList,
-  // getCharacterDetail,
 } from './actions';
 import { ICharacter } from '../../interfaces';
 
@@ -14,7 +13,7 @@ export interface CharactersState {
   pending?: Boolean;
   searchPending?: Boolean;
   availableTotalPage?: number;
-  currentPage?: number | undefined;
+  currentPage: number;
 }
 
 const initialState: CharactersState = {
@@ -36,11 +35,7 @@ export const charactersReducer = createReducer(initialState, (builder) => {
       state.pending = false;
       state.list = [...state.list, ...action.payload.list];
       state.availableTotalPage = action.payload.availableTotalPage;
-      if (state?.currentPage) {
-        state.currentPage += 1;
-      } else {
-        state.currentPage = 0;
-      }
+      state.currentPage += 1;
     })
     .addCase(getCharactersList.rejected, (state) => {
       state.error = true;
@@ -56,7 +51,7 @@ export const charactersReducer = createReducer(initialState, (builder) => {
         state.searchPending = false;
         state.list = [...action.payload.list];
         state.availableTotalPage = action.payload.availableTotalPage;
-        state.currentPage = 0;
+        state.currentPage = action.payload.currentPage;
       },
     )
     .addCase(getSearchedCharactersList.rejected, (state) => {
@@ -66,21 +61,6 @@ export const charactersReducer = createReducer(initialState, (builder) => {
     .addCase(resetCharacterList, (state) => {
       state.list = [];
     });
-  // .addCase(getCharacterDetail.pending, (state) => {
-  //   state.pending = true;
-  //   state.error = false;
-  // })
-  // .addCase(
-  //   getCharacterDetail.fulfilled,
-  //   (state, action: PayloadAction<CharacterDetailState>) => {
-  //     state.pending = false;
-  //     state.characterDetail = action.payload.characterDetail;
-  //   },
-  // )
-  // .addCase(getCharacterDetail.rejected, (state) => {
-  //   state.error = true;
-  //   state.pending = false;
-  // });
 });
 
 export default charactersReducer;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import {
   getCharactersList,
   charactersSelector,
   getSearchedCharactersList,
-  resetCharacterList,
 } from '../../features/characters';
 import { wrapper } from '../../app/store';
 import {
@@ -20,17 +20,21 @@ import CharacterList from '../../components/characters/CharacterList';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 const CharactersPage = () => {
-  const [userInput, setUserInput] = useState<string>('');
+  const router = useRouter();
+  const [userInput, setUserInput] = useState<string|string[]>(router?.query?.search || '');
   const dispatch = useAppDispatch();
   const {
-    list, currentPage, availableTotalPage, pending, searchPending,
+    list,
+    currentPage,
+    availableTotalPage,
+    pending,
   } = useAppSelector(charactersSelector);
 
   const isPageBottom = useInfiniteScroll();
 
   useEffect(() => {
     if (!isPageBottom || !!userInput) return;
-    dispatch(getCharactersList());
+    dispatch(getCharactersList({ reset: false }));
   }, [dispatch, isPageBottom, userInput]);
 
   const handleChange = (value: any) => {
@@ -39,10 +43,14 @@ const CharactersPage = () => {
 
   const handleDebounceChange = (value: any) => {
     if (value) {
-      dispatch(getSearchedCharactersList(value));
+      router.push({
+        pathname: '/characters',
+        query: { ...router.query, search: value },
+      });
     } else {
-      dispatch(resetCharacterList());
-      dispatch(getCharactersList());
+      router.push({
+        pathname: '/characters',
+      });
     }
   };
 
@@ -57,16 +65,16 @@ const CharactersPage = () => {
         }}
         >
           <DebounceInput
+            value={userInput}
             onChange={handleChange}
             onDebounceChange={handleDebounceChange}
             placeholder="SEARCH"
-            pending={searchPending}
           />
         </div>
 
         {list.length > 0 && <CharacterList list={list} />}
 
-        {(list.length === 0 && !pending) && <NoResult /> }
+        {(list.length === 0) && <NoResult /> }
 
         {pending && (
           <div style={{ display: 'flex', textAlign: 'center' }}>
@@ -89,8 +97,12 @@ const CharactersPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  (store) => async () => {
-    await store.dispatch(getCharactersList());
+  (store) => async ({ query }) => {
+    if (query.search) {
+      await store.dispatch(getSearchedCharactersList(query.search));
+    } else {
+      await store.dispatch(getCharactersList({ reset: true }));
+    }
     return {
       props: {},
     };

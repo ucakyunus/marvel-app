@@ -7,7 +7,7 @@ export const resetCharacterList = createAction('characters/resetCharacterList');
 
 export const getCharactersList = createAsyncThunk(
   'characters/charactersList',
-  async (_, { getState }) => {
+  async ({ reset }: any, { getState, dispatch }) => {
     const { characters: { currentPage } }: any = getState();
 
     const [
@@ -32,12 +32,17 @@ export const getCharactersList = createAsyncThunk(
         }),
     ]);
 
+    if (reset === true) {
+      dispatch(resetCharacterList());
+    }
+
     const { results, total } = response1 as IResponse;
     const { results: results2 } = response2;
 
     return {
       list: [...results, ...results2],
       availableTotalPage: Math.ceil(total / (100 * 2)),
+      currentPage,
     };
   },
   {
@@ -51,11 +56,10 @@ export const getCharactersList = createAsyncThunk(
   },
 );
 
-export const getSearchedCharactersList = createAsyncThunk('chracters/searchCharactersList', async (searchValue) => {
+export const getSearchedCharactersList = createAsyncThunk('chracters/searchCharactersList', async (searchValue: string) => {
   const response: any = await marvelApi
     .get('/characters', {
       params: {
-        limit: 100,
         nameStartsWith: searchValue,
         orderBy: 'name',
       },
@@ -66,23 +70,6 @@ export const getSearchedCharactersList = createAsyncThunk('chracters/searchChara
   return {
     list: results,
     availableTotalPage: Math.ceil(total / (100 * 2)),
+    currentPage: 0,
   };
 });
-
-// export const getCharacterDetail = createAsyncThunk(
-//   'characters/characterDetail',
-//   async (characterId: string) => {
-//     const response: IResponse = await marvelApi.get(`characters/${characterId}`);
-//     return {
-//       characterDetail: response?.results[0],
-//     };
-//   },
-//   {
-//     condition: (characterId) => {
-//       if (!characterId) {
-//         return false;
-//       }
-//       return true;
-//     },
-//   },
-// );

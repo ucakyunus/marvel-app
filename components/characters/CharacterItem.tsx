@@ -16,7 +16,7 @@ type CharacterItemProps = {
 const CharacterItem: FC<CharacterItemProps> = ({
   poster, name, characterId, description,
 }) => (
-  <Link scroll={false} href={`/characters/${characterId}`}>
+  <Link href={`/characters/${characterId}`}>
     <a className={styles.listItem}>
       <div className={styles.imageContainer}>
         <Image
