@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {
   FC, memo, useEffect, useRef,
 } from 'react';
@@ -8,7 +9,8 @@ import styles from '../styles/DebounceInput.module.css';
 interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   pending?: boolean;
-  // eslint-disable-next-line no-unused-vars
+  value: string | string[];
+  onChange: (_: React.ChangeEvent<HTMLInputElement>) => void
   onDebounceChange: (_: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -29,7 +31,7 @@ const DebounceInput: FC<InputProps> = ({
     debouncedSearch.cancel();
   }, [debouncedSearch]);
 
-  async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function handleChange(e: any) {
     onChange(e?.target?.value);
     debouncedSearch(e.target.value);
   }

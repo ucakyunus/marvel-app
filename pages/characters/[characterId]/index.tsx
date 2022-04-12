@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { FC } from 'react';
 import { GetServerSideProps } from 'next';
-// import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
@@ -30,13 +31,11 @@ const CharacterDetail: FC<CharacterDetailProps> = ({ characterDetail }) => {
   return (
     <Layout label="Detail">
       <main>
-        {/* <Link scroll={false} > */}
         <a className={styles.backButton} onClick={() => router.back()}>
           <FaArrowLeft />
           {' '}
           <Title>Back</Title>
         </a>
-        {/* </Link> */}
 
         <div className={styles.characterDetail}>
           <Image

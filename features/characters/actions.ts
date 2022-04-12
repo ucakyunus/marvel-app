@@ -60,7 +60,7 @@ export const getCharactersList = createAsyncThunk(
   },
 );
 
-export const getSearchedCharactersList = createAsyncThunk('chracters/searchCharactersList', async (searchValue: string) => {
+export const getSearchedCharactersList = createAsyncThunk('chracters/searchCharactersList', async (searchValue: string|string[]) => {
   try {
     const response: any = await marvelApi
       .get('/characters', {

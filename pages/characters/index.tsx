@@ -104,7 +104,7 @@ const CharactersPage = () => {
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     if (ctx?.query.search) {
-      await store.dispatch(getSearchedCharactersList(ctx?.query?.search));
+      await store.dispatch(getSearchedCharactersList(ctx?.query.search));
     } else {
       await store.dispatch(getCharactersList({ reset: true }));
     }
