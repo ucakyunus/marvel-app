@@ -74,13 +74,17 @@ const CharacterDetail: FC<CharacterDetailProps> = ({ characterDetail }) => {
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   () => async (context) => {
-    const characterId: string = context.params?.characterId as string || '';
-    const response: IResponse = await marvelApi.get(`characters/${characterId}`);
-    return {
-      props: {
-        characterDetail: response.results[0],
-      },
-    };
+    try {
+      const characterId: string = context.params?.characterId as string || '';
+      const response: IResponse = await marvelApi.get(`characters/${characterId}`);
+      return {
+        props: {
+          characterDetail: response.results[0],
+        },
+      };
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
 );
 export default CharacterDetail;

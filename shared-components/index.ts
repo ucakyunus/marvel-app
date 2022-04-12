@@ -6,6 +6,7 @@ import ScrollTopArrow from './scroll-top-arrow';
 import Spinner from './spinner';
 import DebounceInput from './debounce-input';
 import NoResult from './no-result';
+import ProgressBar from './progress-bar';
 
 export {
   CardLink,
@@ -16,4 +17,5 @@ export {
   Spinner,
   DebounceInput,
   NoResult,
+  ProgressBar,
 };
