@@ -1,9 +1,8 @@
 import axios from 'axios';
 import md5 from 'md5';
 import { setupCache } from 'axios-cache-adapter';
-import { BASE_API_URL, PUBLIC_API_KEY, PRIVATE_API_KEY } from '../.env';
 
-const url = `${BASE_API_URL}/v1/public/`;
+const url = `${process.env.NEXT_PUBLIC_BASE_API_URL}/v1/public/`;
 
 // Create `axios-cache-adapter` instance
 const cache = setupCache({
@@ -20,11 +19,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const time = new Date().getTime();
-  const hash = md5(`${time}${PRIVATE_API_KEY}${PUBLIC_API_KEY}`);
+  const hash = md5(`${time}${process.env.NEXT_PUBLIC_PRIVATE_API_KEY}${process.env.NEXT_PUBLIC_PUBLIC_API_KEY}`);
 
   config.params = {
     ts: time,
-    apikey: PUBLIC_API_KEY,
+    apikey: process.env.NEXT_PUBLIC_PUBLIC_API_KEY,
     hash,
     ...config.params,
   };
