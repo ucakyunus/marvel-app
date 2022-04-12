@@ -1,7 +1,7 @@
 import axios from 'axios';
 import md5 from 'md5';
 import { setupCache } from 'axios-cache-adapter';
-import { BASE_API_URL, PUBLIC_API_KEY, PRIVATE_API_KEY } from '.';
+import { BASE_API_URL, PUBLIC_API_KEY, PRIVATE_API_KEY } from '../.env';
 
 const url = `${BASE_API_URL}/v1/public/`;
 
