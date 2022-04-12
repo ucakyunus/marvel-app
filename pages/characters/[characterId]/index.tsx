@@ -36,15 +36,18 @@ const CharacterDetail: FC<CharacterDetailProps> = ({ characterDetail }) => {
         </Link>
 
         <div className={styles.characterDetail}>
-
           <Image
             src={`${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`}
             alt={characterDetail.name}
             layout="intrinsic"
-            width={500}
-            height={500}
+            width={700}
+            height={600}
             objectFit="cover"
             priority
+            loading="eager"
+            quality="50"
+            placeholder="blur"
+            blurDataURL={`${characterDetail.thumbnail.path}.${characterDetail.thumbnail.extension}`}
           />
           <div className={styles.textList}>
             <TextShow textKey="Name" textValue={characterDetail.name} />

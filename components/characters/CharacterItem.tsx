@@ -19,7 +19,16 @@ const CharacterItem: FC<CharacterItemProps> = ({
   <Link scroll={false} href={`/characters/${characterId}`}>
     <a className={styles.listItem}>
       <div className={styles.imageContainer}>
-        <Image src={poster} alt={name} layout="fill" objectFit="cover" />
+        <Image
+          src={poster}
+          alt={name}
+          layout="fill"
+          objectFit="cover"
+          loading="lazy"
+          quality="50"
+          placeholder="blur"
+          blurDataURL={poster}
+        />
       </div>
       <div className={styles.contentContainer}>
         <div>
