@@ -58,10 +58,14 @@ const CharactersPage = () => {
     <Layout label="Characters">
       <>
         <div style={{
-          width: '70%',
+          width: '100%',
           display: 'flex',
           justifyContent: 'center',
           marginBottom: '1rem',
+          backgroundColor: 'black',
+          padding: '0.75rem 0',
+          position: 'fixed',
+          zIndex: 10,
         }}
         >
           <DebounceInput
@@ -72,9 +76,10 @@ const CharactersPage = () => {
           />
         </div>
 
-        {list.length > 0 && <CharacterList list={list} />}
-
-        {(list.length === 0) && <NoResult /> }
+        <div style={{ marginTop: '6rem' }}>
+          {list.length > 0 && <CharacterList list={list} />}
+          {(list.length === 0) && <NoResult /> }
+        </div>
 
         {pending && (
           <div style={{ display: 'flex', textAlign: 'center' }}>

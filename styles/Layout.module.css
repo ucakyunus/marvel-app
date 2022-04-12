@@ -5,6 +5,7 @@
   display: -ms-flexbox;
   display: flex;
   overflow: hidden;
+  position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
