@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.styleTextKey {
+  margin-top: 0
+}
+
 .styleTextValue {
   margin: 0 0 0 2rem;
 }
@@ -26,14 +30,18 @@
 }
 
 @media(max-width:576px) {
-  .styleListShow {
+  .styleListShow, .styleTextShow{
     flex-direction: column;
     align-items: flex-start;
     justify-content: center
   }
 
+  .styleTextValue {
+    margin: 0
+  }
+
   .styleDetailContainer  ul {
-    list-style-type: dotted;
+    list-style-type: inherit;
     text-align: left;
     margin: 0 0 0 1rem;
     padding: 0

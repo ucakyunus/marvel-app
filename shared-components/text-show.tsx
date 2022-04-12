@@ -11,7 +11,7 @@ type TextShowProps = {
 
 const TextShow: FC<TextShowProps> = ({ textKey, textValue, children }) => (
   <div className={`${styles.styleTextShow} ${children && styles.styleListShow}`}>
-    <Title>{textKey}</Title>
+    <Title className={styles.styleTextKey}>{textKey}</Title>
     {textValue && <Title headingLevel="p" className={styles.styleTextValue}>{textValue}</Title>}
     {children && (
       <div className={styles.styleDetailContainer}>

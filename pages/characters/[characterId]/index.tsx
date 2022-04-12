@@ -9,7 +9,10 @@ import marvelApi from '../../../services/api';
 import { wrapper } from '../../../app/store';
 import { Layout, Title, TextShow } from '../../../shared-components';
 import {
-  IResponse, ICharacter, ComicSummary, SeriesSummary,
+  IResponse,
+  ICharacter,
+  ComicSummary,
+  SeriesSummary,
 } from '../../../interfaces';
 import styles from '../../../styles/CharacterDetail.module.css';
 
