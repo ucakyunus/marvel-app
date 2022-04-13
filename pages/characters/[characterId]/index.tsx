@@ -32,7 +32,7 @@ const CharacterDetail: FC<CharacterDetailProps> = ({ characterDetail }) => {
   );
 
   return (
-    <Layout label="Detail">
+    <Layout label={characterDetail.name}>
       <main>
         <a className={styles.backButton} onClick={() => router.back()}>
           <FaArrowLeft />

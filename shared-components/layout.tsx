@@ -20,9 +20,11 @@ type LayoutProps = {
 const Layout: React.FunctionComponent<LayoutProps> = ({ children, label, className }) => (
   <div className={`${styles.container} ${className}`}>
     <Head>
-      <title label={label} />
+      <title>{label}</title>
       <link rel="icon" href="/favicon.ico" />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
+
     {children}
   </div>
 );
